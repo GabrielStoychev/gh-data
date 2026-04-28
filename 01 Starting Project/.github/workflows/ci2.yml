@@ -5,30 +5,19 @@ on:
     branches: [ main ]
 
 jobs:
-  debug-and-build:
+  build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: "01 Starting Project"
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Show repo root
-        run: |
-          echo "PWD:"
-          pwd
-          echo "ROOT CONTENTS:"
-          ls -la
-
-      - name: Find package.json
-        run: |
-          echo "Searching for package.json:"
-          find . -name package.json
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install deps (ROOT)
-        run: npm ci
-        continue-on-error: true
+      - run: npm ci
+      - run: npm run build
