@@ -1,78 +1,22 @@
-name: Deploy website
+name: Path Debug
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  test:
+  debug:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: "01 Starting Project"
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Debug repo structure
+      - name: Show full workspace
         run: |
+          echo "PWD:"
+          pwd
+          echo ""
           echo "Repo root:"
           ls -la
           echo ""
-          echo "Project folder:"
-          ls -la "01 Starting Project"
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint code
-        run: npm run lint
-
-      - name: Test code
-        run: npm run test
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: "01 Starting Project"
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build website
-        run: npm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: |
-            01 Starting Project/dist
-            01 Starting Project/package.json
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: echo "Deploying..."
+          echo "Find package.json anywhere:"
+          find . -name package.json
