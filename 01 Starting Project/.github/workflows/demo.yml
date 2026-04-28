@@ -14,10 +14,18 @@ jobs:
         working-directory: "01 Starting Project"
 
     steps:
-      - name: Get code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Debug repo structure
+        run: |
+          echo "Repo root:"
+          ls -la
+          echo ""
+          echo "Project folder:"
+          ls -la "01 Starting Project"
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -40,10 +48,10 @@ jobs:
         working-directory: "01 Starting Project"
 
     steps:
-      - name: Get code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
