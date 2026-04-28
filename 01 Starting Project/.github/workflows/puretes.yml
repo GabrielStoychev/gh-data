@@ -13,4 +13,3 @@ jobs:
 
       - name: Say hello
         run: echo "✅ GitHub Actions is working!"
-``
