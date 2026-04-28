@@ -37,7 +37,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: website   # 👈 IMPORTANT
+        working-directory: "01 Starting Project"
 
     steps:
       - name: Get code
@@ -59,8 +59,8 @@ jobs:
         with:
           name: dist-files
           path: |
-            website/dist
-            website/package.json
+            01 Starting Project/dist
+            01 Starting Project/package.json
 
   deploy:
     needs: build
